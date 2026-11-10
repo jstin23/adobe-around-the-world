@@ -266,28 +266,6 @@ footer{padding:24px var(--gut);display:flex;justify-content:space-between;gap:12
   </div>
 </section>
 
-<!-- 2 · MAP -->
-<section class="map-sec">
-  <div class="map-pin" id="mapPin">
-    <button class="skip-route" id="skipRoute" type="button">Skip the route ↓</button>
-    <div class="map-head">
-      <h2>The route</h2>
-      <p>Scroll to follow the route. Four countries this winter and four more by spring, each one a different light and a different edit.</p>
-    </div>
-    <div class="map-stage">
-      <div class="globe-wrap" id="globeWrap"><div id="globe"></div></div>
-      <div class="map-card" aria-live="polite">
-        <p class="label" id="mcIdx">Stop 1 of 12</p>
-        <h3 id="mcName">Vancouver</h3>
-        <p class="when" id="mcWhen">Now to November 20</p>
-        <p id="mcText"></p>
-        <p class="phase" id="mcPhase"></p>
-      </div>
-    </div>
-    <div class="map-rail" id="mapRail"></div>
-  </div>
-</section>
-
 <!-- 3 · LOCATIONS -->
 <section class="places">
   <div class="wrap center">
@@ -547,6 +525,28 @@ footer{padding:24px var(--gut);display:flex;justify-content:space-between;gap:12
   </div>
 </section>
 
+<!-- 5b · MAP -->
+<section class="map-sec">
+  <div class="map-pin" id="mapPin">
+    <button class="skip-route" id="skipRoute" type="button">Skip the route ↓</button>
+    <div class="map-head">
+      <h2>The route</h2>
+      <p>Scroll to follow the route. Four countries this winter and four more by spring, each one a different light and a different edit.</p>
+    </div>
+    <div class="map-stage">
+      <div class="globe-wrap" id="globeWrap"><div id="globe"></div></div>
+      <div class="map-card" aria-live="polite">
+        <p class="label" id="mcIdx">Stop 1 of 12</p>
+        <h3 id="mcName">Vancouver</h3>
+        <p class="when" id="mcWhen">Now to November 20</p>
+        <p id="mcText"></p>
+        <p class="phase" id="mcPhase"></p>
+      </div>
+    </div>
+    <div class="map-rail" id="mapRail"></div>
+  </div>
+</section>
+
 <!-- 6 · CONTACT -->
 <section class="contact">
   <div class="wrap">
@@ -740,13 +740,13 @@ var START={name:"Vancouver", when:"To November 20", text:"Home base. First fligh
   if(reduce){
     place(1);
     rail.addEventListener("click",function(e){ var b=e.target.closest("button"); if(b) jumpStatic(+b.dataset.i); });
-    document.getElementById("skipRoute").addEventListener("click",function(){ document.querySelector(".places").scrollIntoView({behavior:"smooth"}); });
+    document.getElementById("skipRoute").addEventListener("click",function(){ document.querySelector(".contact").scrollIntoView({behavior:"smooth"}); });
   } else {
     gsap.registerPlugin(ScrollTrigger);
     var st=ScrollTrigger.create({ trigger:"#mapPin", start:"top top", end:"+="+(SEGS.length*110)+"%", pin:true, scrub:1, onUpdate:function(s){ place(s.progress); } });
     function jump(i){ var y=st.start+(st.end-st.start)*(cumW[i]/totalW)+2; window.scrollTo({top:y,behavior:"smooth"}); }
     rail.addEventListener("click",function(e){ var b=e.target.closest("button"); if(b) jump(+b.dataset.i); });
-    document.getElementById("skipRoute").addEventListener("click",function(){ place(1); var y=document.querySelector(".places").getBoundingClientRect().top+window.scrollY-10; window.scrollTo({top:y,behavior:"smooth"}); });
+    document.getElementById("skipRoute").addEventListener("click",function(){ place(1); var y=document.querySelector(".contact").getBoundingClientRect().top+window.scrollY-10; window.scrollTo({top:y,behavior:"smooth"}); });
     window.addEventListener("load",function(){ ScrollTrigger.refresh(); });
   }
   place(0);
